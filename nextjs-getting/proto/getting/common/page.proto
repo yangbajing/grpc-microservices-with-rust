@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package getting.common;
+
+message Pagination {
+  int64 page = 1;
+  int64 page_size = 2;
+  repeated SortBy sort_bys = 3;
+}
+
+message SortBy {
+  string field = 1;
+  SortDirection direction = 2;
+}
+
+enum SortDirection {
+  SORT_DIRECTION_UNSPECIFIED = 0;
+  SORT_DIRECTION_ASCE = 1;
+  SORT_DIRECTION_DESC = 2;
+}

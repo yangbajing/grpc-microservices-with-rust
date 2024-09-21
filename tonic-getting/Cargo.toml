@@ -1,0 +1,17 @@
+[package]
+name = "tonic-getting"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+anyhow = "1"
+tokio = { version = "1", features = ["full"] }
+# tracing = "0.1"
+tracing-subscriber = "0.3"
+tower-http = { version = "0.6", features = ["trace"] }
+tonic = "0.12"
+tonic-web = "0.12"
+prost = "0.13"
+
+[build-dependencies]
+tonic-build = "0.12"

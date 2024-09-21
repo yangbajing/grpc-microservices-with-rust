@@ -1,0 +1,19 @@
+{
+  "accessibility.signals.terminalBell": {
+    "sound": "off"
+  },
+  "accessibility.signals.terminalQuickFix": {
+    "sound": "off"
+  },
+  "accessibility.signals.terminalCommandSucceeded": {
+    "sound": "off"
+  },
+  "accessibility.signals.terminalCommandFailed": {
+    "sound": "off"
+  },
+  "rust-analyzer.cargo.buildScripts.enable": true,
+  "rust-analyzer.linkedProjects": [
+    "codes/microservices-proto/Cargo.toml",
+    "codes/tonic-getting/Cargo.toml"
+  ],
+}
