@@ -13,7 +13,6 @@
   },
   "rust-analyzer.cargo.buildScripts.enable": true,
   "rust-analyzer.linkedProjects": [
-    "codes/microservices-proto/Cargo.toml",
-    "codes/tonic-getting/Cargo.toml"
+    "tonic-getting/Cargo.toml"
   ],
 }
