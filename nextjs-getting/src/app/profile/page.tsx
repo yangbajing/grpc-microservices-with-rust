@@ -18,11 +18,13 @@ export default function Profile() {
       })
       .catch((error) => {
         if (isAbortError(error)) {
-          return;
+          return; // 忽略 aboted 错误
         }
         throw error;
       });
-    return () => abortController.abort("cleanup");
+
+    // 当 effect 退出时 自动取消请求异步请求
+    return () => abortController.abort("manual aborted");
   }, []);
 
   useEffect(() => {
@@ -39,7 +41,8 @@ export default function Profile() {
       }
       throw error;
     });
-    return () => abortController.abort("cleanup");
+
+    return () => abortController.abort("manual aborted");
   }, []);
 
   return (
