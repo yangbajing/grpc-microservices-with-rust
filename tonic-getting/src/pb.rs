@@ -17,7 +17,7 @@ mod tests {
   #[test]
   fn test_user() {
     let pagination = Pagination { page: 1, page_size: 20, ..Default::default() };
-    let page_user_request = PageUserRequest { pagination: Some(pagination) };
+    let page_user_request = PageUserRequest { pagination: Some(pagination), ..Default::default() };
     println!("Page user request is {:?}", page_user_request);
   }
 }

@@ -1,7 +1,7 @@
 fn main() {
-  println!("cargo::rerun-if-changed=proto/**/*.proto");
-
   tonic_build::configure()
+    // 显示启用当 .proto 文件变化时自动重编译
+    .emit_rerun_if_changed(true)
     .compile(
       &[
         "proto/getting/basic.proto",

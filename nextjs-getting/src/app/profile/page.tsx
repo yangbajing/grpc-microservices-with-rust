@@ -3,14 +3,43 @@ import { useEffect, useState } from "react";
 import { userClient } from "@/lib/grpc-web";
 import { Label } from "@/components/ui/label";
 import { UserDto } from "@/pb/getting/v1/user";
+import { isAbortError } from "abort-controller-x";
 
 export default function Profile() {
   const [user, setUser] = useState<UserDto>();
+
   useEffect(() => {
-    userClient.get({ id: 1 }).then((res) => {
-      console.log(res);
-      setUser(res);
+    const abortController = new AbortController();
+    userClient
+      .get({ id: 1 }, { signal: abortController.signal })
+      .then((res) => {
+        console.log(res);
+        setUser(res);
+      })
+      .catch((error) => {
+        if (isAbortError(error)) {
+          return;
+        }
+        throw error;
+      });
+    return () => abortController.abort("cleanup");
+  }, []);
+
+  useEffect(() => {
+    const abortController = new AbortController();
+    async function streams() {
+      for await (const res of userClient.streamList({}, { signal: abortController.signal })) {
+        console.log("streamList response:", res);
+      }
+    }
+
+    streams().catch((error) => {
+      if (isAbortError(error)) {
+        return;
+      }
+      throw error;
     });
+    return () => abortController.abort("cleanup");
   }, []);
 
   return (

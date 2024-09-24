@@ -8,6 +8,7 @@ import "getting/common/page.proto";
 service User {
   rpc Get(GetUserRequest) returns (UserDto) {}
   rpc Update(UpdateUserRequest) returns (getting.Empty) {}
+  rpc StreamList(StreamListRequest) returns (stream UserDto) {}
 }
 
 message UserDto {
@@ -15,18 +16,25 @@ message UserDto {
   string email = 2;
   optional string name = 3;
   int32 status = 4;
+  // epoch time in milliseconds
+  int64 ctime = 5;
 }
 
-message GetUserRequest {
-  int64 id = 1;
-}
+message GetUserRequest { int64 id = 1; }
 
 message PageUserRequest {
   getting.common.Pagination pagination = 1;
+  optional string name = 2;
+  optional int32 status = 3;
 }
 
 message UpdateUserRequest {
   int64 id = 1;
+  optional string name = 2;
+  optional int32 status = 3;
+}
+
+message StreamListRequest {
   optional string name = 2;
   optional int32 status = 3;
 }
